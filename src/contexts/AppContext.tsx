@@ -1,14 +1,11 @@
 // src/context/AppContext.tsx
 import React, { createContext, useState } from 'react';
+import { Owner } from '../data';
 
-type Owner = {
-  name: string;
-  email: string;
-};
 
 type AppContextType = {
   currentOwner: Owner | null;
-  registerOwner: (owner: Owner) => void;
+  registerOwner: (name: string, email: string) => void;
   loginOwner: (email: string) => boolean;
 };
 
@@ -22,7 +19,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [owners, setOwners] = useState<Owner[]>([]);
   const [currentOwner, setCurrentOwner] = useState<Owner | null>(null);
 
-  const registerOwner = (owner: Owner) => {
+  const registerOwner = (name: string, email: string) => {
+    const newId =
+      owners.length > 0
+        ? Math.max(...owners.map((o) => Number(o.id))) + 1
+        : 1;
+  
+    const owner: Owner = {
+      id: newId,
+      name,
+      email,
+    };
+  
     setOwners((prev) => [...prev, owner]);
     setCurrentOwner(owner);
   };

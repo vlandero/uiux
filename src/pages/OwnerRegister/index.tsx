@@ -12,7 +12,7 @@ export function OwnerRegister() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    registerOwner({ name, email });
+    registerOwner(name, email);
     navigate('/dashboard');
   };
 

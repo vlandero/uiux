@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import styles from './index.module.css';
 import { restaurants } from '../../data';
 import { ReservationModal } from '../../components/ReservationModal';
 

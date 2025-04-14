@@ -8,6 +8,7 @@ import { ClientBrowse } from './pages/ClientBrowse';
 import { ClientRestaurant } from './pages/ClientRestaurant';
 import { OwnerLogin } from './pages/OwnerLogin';
 import { AppProvider } from './contexts/AppContext';
+import { OwnerRestaurant } from './pages/OwnerRestaurant';
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
         <Route path="/browse" element={<ClientBrowse />} />
         <Route path="/restaurant/:id" element={<ClientRestaurant />} />
         <Route path="/login" element={<OwnerLogin />} />
+        <Route path="/owner/restaurant/:id" element={<OwnerRestaurant />} />
       </Routes>
     </AppProvider>
   );
