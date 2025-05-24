@@ -103,9 +103,9 @@ export const sampleRestaurant: Restaurant = {
         }
     ],
     contact: {
-        phone: '+1 (555) 123-4567',
+        phone: '+407suna-ma',
         email: 'info@gourmethaven.com',
-        address: '123 Culinary Street, Foodville'
+        address: 'Bd Pipera 2E'
     }
 };
 

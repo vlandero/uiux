@@ -10,6 +10,14 @@ import { AddRestaurant } from './pages/AddRestaurant';
 import styles from './App.module.css';
 
 const App: React.FC = () => {
+  const handleResetData = () => {
+    if (window.confirm('Are you sure you want to reset all restaurant data? This will delete all saved restaurants.')) {
+      // Clear only the restaurants data
+      localStorage.removeItem('restaurantsData');
+      // Refresh the page
+      window.location.reload();
+    }
+  };
   return (
     <div className={styles.appContainer}>
       <nav className={styles.navbar}>
@@ -47,6 +55,13 @@ const App: React.FC = () => {
       <footer className={styles.footer}>
         <p>© {new Date().getFullYear()} Rezervo Restaurant Reservations</p>
       </footer>
+      <button
+        onClick={handleResetData}
+        className={styles.resetDataButton}
+        title="Reset restaurant data (development only)"
+      >
+        🗑️
+      </button>
     </div>
   );
 };
