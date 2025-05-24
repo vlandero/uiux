@@ -1,0 +1,133 @@
+/* Base Styles */
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.mainContent {
+    flex: 1;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #121212;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #333;
+}
+
+.navBrand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navBrand a {
+    color: #e8c547;
+    text-decoration: none;
+}
+
+.navLinks {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.navLinks a {
+    color: #f5f5f5;
+    text-decoration: none;
+    transition: color 0.2s;
+    padding: 0.5rem 0;
+}
+
+.navLinks a:hover {
+    color: #e8c547;
+}
+
+.authLinks {
+    display: flex;
+    gap: 1rem;
+    margin-left: 1rem;
+}
+
+.loginLink {
+    color: #f5f5f5 !important;
+}
+
+.registerLink {
+    background-color: #e8c547;
+    color: #121212 !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.registerLink:hover {
+    background-color: #d4b23c;
+    color: #121212 !important;
+}
+
+/* Mobile Menu */
+.navToggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: #f5f5f5;
+    transition: all 0.3s;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #121212;
+    color: #aaa;
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 1px solid #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navLinks {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-top: 1rem;
+    }
+
+    .navToggle:checked~.navLinks {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .authLinks {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .registerLink {
+        text-align: center;
+    }
+}

@@ -1,14 +1,42 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import styles from './index.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import styles from '../OwnerRestaurant/index.module.css';
 import { Page } from '../../components/Page';
-import { Restaurant, restaurants, updateRestaurant } from '../../data2';
+import { addRestaurant, Restaurant, restaurants, updateRestaurant } from '../../data2';
 
-export function OwnerRestaurant() {
-    const { id } = useParams();
+const emptyRestaurant: Omit<Restaurant, 'id'> = {
+    name: '',
+    description: '',
+    category: '',
+    rating: 0,
+    images: [],
+    openingHours: {
+        monday: { open: '11:00', close: '22:00' },
+        tuesday: { open: '11:00', close: '22:00' },
+        wednesday: { open: '11:00', close: '22:00' },
+        thursday: { open: '11:00', close: '23:00' },
+        friday: { open: '11:00', close: '00:00' },
+        saturday: { open: '10:00', close: '00:00' },
+        sunday: { open: '10:00', close: '21:00' }
+    },
+    tables: [
+        { id: '1', capacity: 2, isAvailable: true },
+        { id: '2', capacity: 4, isAvailable: true }
+    ],
+    reservations: [],
+    contact: {
+        phone: '',
+        email: '',
+        address: ''
+    },
+    ownerId: ''
+};
+
+export function AddRestaurant() {
     const [activeTab, setActiveTab] = useState<'details' | 'reservations'>('details');
-    const [restaurant, setRestaurant] = useState<Restaurant>(restaurants.find(r => r.id === id)!);
+    const [restaurant, setRestaurant] = useState<Omit<Restaurant, 'id'>>(emptyRestaurant);
     const [newImage, setNewImage] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -27,10 +55,10 @@ export function OwnerRestaurant() {
 
     const handleAddImage = () => {
         if (newImage && !restaurant.images.includes(newImage)) {
-            setRestaurant({
-                ...restaurant,
-                images: [...restaurant.images, newImage]
-            });
+            setRestaurant(prev => ({
+                ...prev,
+                images: [...prev.images, newImage]
+            }));
             setNewImage('');
         }
     };
@@ -50,11 +78,12 @@ export function OwnerRestaurant() {
 
         setSaveStatus('saving');
         try {
-            updateRestaurant(id!, restaurant);
+            const newRestaurant = addRestaurant(restaurant);
             setSaveStatus('success');
 
             setTimeout(() => {
                 setSaveStatus('idle');
+                navigate(`/restaurant/${newRestaurant.id}`);
             }, 2000);
         } catch (error) {
             console.error('Failed to save:', error);
